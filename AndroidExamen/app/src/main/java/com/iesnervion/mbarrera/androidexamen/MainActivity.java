@@ -111,9 +111,11 @@ public class MainActivity extends AppCompatActivity{
                 switch (item.getItemId()){
                     case R.id.borrarItem:
                         //BorrarJugador
-                        ((Datos) MainActivity.this.getApplication()).borrarJugador(position);
+                        //((Datos) MainActivity.this.getApplication()).borrarJugador(position);
+                        borrarJugador(position);
                         //Obtener la lista actualizada
-                        jugadores =  ((Datos) MainActivity.this.getApplication()).getJugadores();
+                        //jugadores =  ((Datos) MainActivity.this.getApplication()).getJugadores();
+                        jugadores = obtenerListado();
                         Jugador[] jugadoresArray =  jugadores.toArray(new Jugador[0]);
                         //Crear adapter con la lista actualizada
                         miArrayAdapter = new MyArrayAdapterTotal<Jugador>(getApplicationContext(),R.layout.fila_personalizada,R.id.tvNombre, jugadoresArray);
@@ -142,6 +144,14 @@ public class MainActivity extends AppCompatActivity{
         });
         //dont forget to show the menu
         popupMenu.show();
+    }
+
+    private void borrarJugador(int position) {
+        Jugador j = jugadores.get(position);
+        String cadena = "DELETE FROM "+Jugador_DB.JUGADOR_DB_TABLE_NAME+" WHERE "+Jugador_DB.JUGADOR_DB_NOMBRE+" = '"+j.getNombre()+"' ;";
+        SQLiteDatabase db = manejadoraJugadores.getWritableDatabase();
+        db.execSQL(cadena);
+        db.close();
     }
 
     public ArrayList<Jugador> obtenerListado(){

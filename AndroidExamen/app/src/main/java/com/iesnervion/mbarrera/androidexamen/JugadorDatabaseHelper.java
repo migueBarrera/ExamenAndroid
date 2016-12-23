@@ -14,7 +14,7 @@ import com.iesnervion.mbarrera.androidexamen.Contrato.Jugador_DB;
 public class JugadorDatabaseHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "dabaseJugadores.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     //Cadenas
         //CrearTablas
@@ -27,6 +27,7 @@ public class JugadorDatabaseHelper extends SQLiteOpenHelper{
                                                         +","+Jugador_DB.JUGADOR_DB_POSICION+");";
 
     public JugadorDatabaseHelper(Context context) {
+
         super(context, DATABASE_NAME, null, VERSION);
     }
 
